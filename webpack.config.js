@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
@@ -11,6 +12,7 @@ module.exports = {
     assetModuleFilename: "[name] [ext]",
   },
 
+  plugins: [new HtmlWebpackPlugin()],
 
   devServer: {
     port: 9000,

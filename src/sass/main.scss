@@ -1,5 +1,13 @@
-$color: rgb(0, 255, 34);
+$baseColor: #1e252b;
+$shiftColor: #ffffffe5;
+$btnColor: #ff6e30;
+$Darkgray: #837a93;
 
-div {
-   color: $color;
+body {
+   wrapper {
+      background-color: #ff6e30;
+      nav {
+         display: flex;
+      }
+   }
 }
