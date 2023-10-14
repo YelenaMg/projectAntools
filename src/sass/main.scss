@@ -1,5 +1,6 @@
 $baseColor: #1e252b;
-$shiftColor: #ffffffe5;
+$shiftColor: rgba(255, 255, 255, 0.9);
+$shiftColorSecond: rgba(255, 255, 255, 0.55);
 $btnColor: #ff6e30;
 $Darkgray: #837a93;
 
@@ -11,74 +12,564 @@ $Darkgray: #837a93;
 body {
    .parent {
       background-color: $baseColor;
-      .nav {
-         width: 100%;
-         height: 60px;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         padding-top: 30px;
-         gap: 120px;
-         .nav__logoTitle {
+
+      .wrapper {
+         width: 95%;
+         height: 100vh;
+         margin: 0 auto;
+         .nav {
+            width: 100%;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            .nav__logoTitle_title {
-               font-size: 22px;
-               margin-left: 10px;
-               color: $shiftColor;
+            padding-top: 38px;
+            gap: 100px;
+
+            @media only screen and (max-width: 737px) {
+               padding-top: 20px;
             }
-         }
-         .nav__menu {
-            display: flex;
-            gap: 20px;
-            .nav__menu_item {
-               list-style: none;
-               .nav__menu_item_link {
-                  text-decoration: none;
+            @media only screen and (max-width: 410px) {
+               gap: 50px;
+            }
+            &__logoTitle {
+               display: flex;
+               align-items: center;
+               @media only screen and (max-width: 530px) {
+                  order: 2;
+               }
+
+               &_title {
+                  margin-left: 12px;
                   color: $shiftColor;
-                  opacity: 0.5;
+                  font-family: Poppins;
+                  font-size: 22px;
+                  font-style: normal;
+                  font-weight: 600;
+                  line-height: normal;
+
+                  @media only screen and (max-width: 860px) {
+                     display: none;
+                  }
+                  //.logo {
+                  //   svg {
+                  //      width: 50px;
+                  //      height: 50px;
+                  //   }
+                  //}
+               }
+            }
+            .nav__menu {
+               display: flex;
+               gap: 30px;
+               align-items: center;
+               @media only screen and (max-width: 980px) {
+                  gap: 20px;
+               }
+               @media only screen and (max-width: 890px) {
+                  gap: 10px;
+               }
+               @media only screen and (max-width: 737px) {
+                  display: none;
+               }
+               .nav__menu_item {
+                  list-style: none;
+                  position: relative;
+                  &:hover {
+                     .wrapper_menu {
+                        display: block;
+                     }
+                  }
+
+                  svg {
+                     padding-top: 8px;
+
+                     @media only screen and (max-width: 860px) {
+                        width: 20px;
+                        height: 20px;
+                     }
+                  }
+
+                  .wrapper_menu {
+                     display: none;
+                     position: absolute;
+
+                     .wrapper_menu_item {
+                        list-style: none;
+                        padding-top: 10px;
+
+                        &:hover {
+                           opacity: 0.5;
+                        }
+                     }
+
+                     .wrapper_menu_item_link {
+                        text-decoration: none;
+                        color: #ff6e30;
+                     }
+                  }
+                  .nav__menu_item_link {
+                     text-decoration: none;
+                     color: $shiftColorSecond;
+                     font-size: 16px;
+                     font-family: Poppins;
+                     font-size: 16px;
+                     font-style: normal;
+                     font-weight: 500;
+                     line-height: normal;
+
+                     &:hover {
+                        color: $btnColor;
+                     }
+                  }
+               }
+            }
+
+            .nav_menu_burger {
+               position: relative;
+               display: none;
+               stroke: $shiftColor;
+               top: -50%;
+               .c-hamburger {
+                  //position: absolute;
+                  left: 50%;
+                  transform: (-50%);
+                  display: block;
+                  overflow: hidden;
+                  margin: 0;
+                  padding: 0;
+                  width: 90px;
+                  font-size: 0;
+                  box-shadow: none;
+                  cursor: pointer;
+                  background: none;
+                  border: none;
+
+                  &:focus {
+                     outline: none;
+                  }
+
+                  span {
+                     display: block;
+                     position: absolute;
+                     top: 44px;
+                     left: 18px;
+                     right: 18px;
+                     height: 4px;
+                     background-color: $shiftColor;
+                     transition: background 0s 0.3s;
+
+                     &::after {
+                        position: absolute;
+                        display: block;
+                        left: 0;
+                        width: 100%;
+                        height: 4px;
+                        background: $shiftColor;
+                        content: "";
+                        bottom: 20px;
+                     }
+                     &::before {
+                        position: absolute;
+                        display: block;
+                        left: 0;
+                        width: 100%;
+                        height: 4px;
+                        background: $shiftColor;
+                        content: "";
+                        top: -10px;
+                        transition-duration: 0.3s, 0.3s;
+                        transition-delay: 0.3, 0;
+                     }
+                  }
+               }
+               .c-humburger-line {
+                  span {
+                     transition: background 0s 0.3s;
+
+                     &::before {
+                        transition-duration: 0.3s, 0.3s;
+                        transition-delay: 0.3, 0;
+                        transition-property: top, transform;
+                     }
+                     &::after {
+                        transition-duration: 0.3s, 0.3s;
+                        transition-delay: 0.3, 0;
+                        transition-property: button, transform;
+                     }
+                  }
+               }
+
+               .is-active {
+                  span {
+                     background: none;
+                     &::after {
+                        bottom: 0;
+                        transform: rotate(45deg);
+                        transition-delay: 0s, 0.3s;
+                     }
+                     &::before {
+                        top: 0;
+                        transform: rotate(-45deg);
+                     }
+                  }
+               }
+               @media only screen and (max-width: 530px) {
+                  order: 1;
+               }
+
+               @media only screen and (max-width: 737px) {
+                  display: block;
+               }
+
+               svg {
+                  @media only screen and (max-width: 450px) {
+                     width: 30px;
+                  }
+                  @media only screen and (max-width: 440px) {
+                     width: 40px;
+                  }
+               }
+            }
+
+            .nav__loginSignup {
+               @media only screen and (max-width: 530px) {
+                  display: none;
+               }
+               .nav__login {
+                  text-decoration: none;
+                  color: $shiftColorSecond;
+                  margin-right: 20px;
+                  font-family: Poppins;
                   font-size: 16px;
+                  font-style: normal;
+                  font-weight: 600;
+                  line-height: normal;
+                  @media only screen and (max-width: 860px) {
+                     margin-right: 10px;
+                     font-size: 15px;
+                  }
+                  @media only screen and (max-width: 737px) {
+                     font-size: 16px;
+                  }
+               }
+               .nav__signUp {
+                  width: 118px;
+                  height: 48px;
+                  padding-right: 12px;
+                  padding-left: 12px;
+                  padding-top: 8px;
+                  padding-bottom: 8px;
+                  background-color: $btnColor;
+                  border: 1px solid $btnColor;
+                  border-radius: 8px;
+                  color: $shiftColor;
+                  text-decoration: none;
+                  font-family: Poppins;
+                  font-size: 16px;
+                  font-style: normal;
+                  font-weight: 600;
+                  line-height: normal;
+
+                  @media only screen and (max-width: 860px) {
+                     width: 118px;
+                     padding-right: 12px;
+                     padding-left: 12px;
+                     padding-top: 8px;
+                     padding-bottom: 8px;
+                     font-size: 16px;
+                  }
+
+                  @media only screen and (max-width: 754px) {
+                     width: 50px;
+                     padding: 5px;
+                     font-size: 15px;
+                  }
+               }
+            }
+
+            .nav_login_icons {
+               display: none;
+
+               @media only screen and (max-width: 530px) {
+                  display: block;
+                  order: 3;
+               }
+               @media only screen and (max-width: 450px) {
+                  display: flex;
+                  gap: 10px;
+               }
+
+               .login {
+                  width: 40px;
+                  height: 40px;
+                  stroke: $shiftColor;
+                  fill: #00000000;
+
+                  @media only screen and (max-width: 410px) {
+                     width: 40px;
+                     height: 40px;
+                  }
+               }
+
+               .signup {
+                  stroke: $shiftColor;
+                  fill: none;
+                  width: 40px;
+                  height: 40px;
+                  @media only screen and (max-width: 410px) {
+                     width: 30px;
+                     height: 30px;
+                  }
                }
             }
          }
 
-         .nav__loginSignup {
-            .nav__login {
-               text-decoration: none;
-               color: $shiftColor;
-               opacity: 0.5;
-               margin-right: 20px;
+         .main {
+            width: 100%;
+            height: calc(100vh - 82.27px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 60px;
+
+            @media only screen and (max-width: 737px) {
+               flex-direction: column;
+               padding-top: 10px;
             }
-            .nav__signUp {
-               padding-right: 12px;
-               padding-left: 12px;
-               padding-top: 8px;
-               padding-bottom: 8px;
-               background-color: $btnColor;
-               border: 1px solid $btnColor;
-               border-radius: 8px;
-               color: $shiftColor;
-               text-decoration: none;
-               font-size: 16px;
+
+            @media only screen and (max-width: 860px) {
+               position: relative;
+            }
+
+            .main_right {
+               margin-top: 20px;
+               justify-content: center;
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               height: 100%;
+               @media only screen and (max-width: 737px) {
+                  position: relative;
+                  margin-top: 0;
+               }
+               .burger_menu_o {
+                  background-color: rgba(0, 0, 0, 0.7);
+                  width: 105%;
+                  height: 100%;
+                  display: none;
+                  position: absolute;
+                  text-align: center;
+
+                  .burger_menu_op {
+                     width: 100%;
+                     height: 100%;
+                     display: flex;
+                     flex-direction: column;
+                     justify-content: center;
+                     align-items: center;
+                     gap: 20px;
+
+                     .burger_menu_open_item {
+                        list-style: none;
+
+                        .wrapper_menu {
+                           display: none;
+                        }
+                        .burger_menu_open_item_link {
+                           color: $shiftColor;
+                           text-decoration: none;
+                           font-size: 22px;
+
+                           svg {
+                              width: 20px;
+                              height: 20px;
+                              stroke: $shiftColor;
+                              padding-top: 6px;
+                           }
+                        }
+                     }
+                  }
+                  @media only screen and (max-width: 737px) {
+                     display: block;
+                  }
+               }
+               @media only screen and (max-width: 737px) {
+                  width: 100%;
+               }
+
+               .main_right_title {
+                  font-size: 50px;
+                  font-weight: 500;
+                  color: $shiftColor;
+                  line-height: 70px;
+                  @media only screen and (max-width: 1100px) {
+                     font-size: 47px;
+                     line-height: 50px;
+                  }
+                  @media only screen and (max-width: 980px) {
+                     font-size: 40px;
+                  }
+                  @media only screen and (max-width: 737px) {
+                     height: 100%;
+                     font-size: 50px;
+                     line-height: 70px;
+                     //padding-bottom: 50px;
+                     margin-top: 30px;
+                  }
+                  @media only screen and (max-width: 737px) {
+                     font-size: 30px;
+                     line-height: 40px;
+                  }
+                  .dote {
+                     color: $btnColor;
+                  }
+               }
+               .main_right_text {
+                  font-size: 18px;
+                  color: $shiftColorSecond;
+                  margin-top: 30px;
+                  line-height: 30px;
+                  font-weight: 400;
+                  margin-bottom: 60px;
+                  @media only screen and (max-width: 980px) {
+                     font-size: 16px;
+                  }
+                  @media only screen and (max-width: 737px) {
+                     font-size: 22px;
+                     line-height: 35px;
+                  }
+                  @media only screen and (max-width: 737px) {
+                     font-size: 16px;
+                     line-height: 20px;
+                     margin-top: 10px;
+                  }
+               }
+               .srchContainer {
+                  width: 497px;
+                  height: 64px;
+                  border-radius: 15px;
+                  border: 1.5px solid rgba(255, 255, 255, 0.1);
+                  background: #283036;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  padding-left: 18px;
+                  padding-right: 12px;
+                  @media only screen and (max-width: 1100px) {
+                     width: 450px;
+                  }
+                  @media only screen and (max-width: 980px) {
+                     width: 400px;
+                  }
+                  @media only screen and (max-width: 860px) {
+                     width: 380px;
+                  }
+                  @media only screen and (max-width: 737px) {
+                     width: 450px;
+                  }
+                  @media only screen and (max-width: 737px) {
+                     width: 350px;
+                     height: 50px;
+                  }
+                  @media only screen and (max-width: 410px) {
+                     width: 240px;
+                  }
+                  .srchInput {
+                     height: 24px;
+                     width: 190px;
+                     margin-left: 13px;
+                     background: none;
+                     border: none;
+                     outline: none;
+                     font-size: 14px;
+
+                     @media only screen and (max-width: 1100px) {
+                        width: 180px;
+                     }
+                     @media only screen and (max-width: 980px) {
+                        width: 100px;
+                     }
+                     @media only screen and (max-width: 737px) {
+                        width: 190px;
+                     }
+                     @media only screen and (max-width: 410px) {
+                        padding-left: 15px;
+
+                        ::placeholder {
+                           font-size: 11px;
+                        }
+                     }
+                  }
+                  .btnSrch {
+                     width: 130px;
+                     height: 48px;
+                     border-radius: 8px;
+                     background: $btnColor;
+                     border: none;
+                     font-family: Poppins;
+                     font-size: 16px;
+                     font-style: normal;
+                     font-weight: 600;
+                     line-height: normal;
+                     color: $shiftColor;
+                     margin-left: 100px;
+                     @media only screen and (max-width: 980px) {
+                        width: 110px;
+                     }
+                     @media only screen and (max-width: 737px) {
+                        width: 110px;
+                     }
+                     @media only screen and (max-width: 530px) {
+                        padding-left: 15px;
+                        padding-right: 15px;
+                     }
+                     @media only screen and (max-width: 410px) {
+                        margin-left: 10px;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                     }
+                  }
+               }
+               .icons_container {
+                  margin-top: 121px;
+                  padding-left: 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 20px;
+                  @media only screen and (max-width: 1100px) {
+                     margin-top: 100px;
+                  }
+                  @media only screen and (max-width: 980px) {
+                     margin-top: 40px;
+                  }
+               }
+            }
+            .main_left {
+               width: 589px;
+               height: 100%;
+               margin-top: 20px;
+               @media only screen and (max-width: 1200px) {
+                  width: 500px;
+               }
+               @media only screen and (max-width: 1200px) {
+                  width: 450px;
+               }
+               @media only screen and (max-width: 980px) {
+                  width: 410px;
+               }
+               @media only screen and (max-width: 737px) {
+                  width: 80%;
+               }
+               @media only screen and (max-width: 737px) {
+                  display: none;
+               }
+               svg {
+                  padding: 0;
+                  width: 100%;
+                  height: 100%;
+               }
             }
          }
-      }
-
-      .main{
-         width: 100%;
-        display: flex;
-        justify-content: center;
-        padding-top: 100px;
-        .main_right{
-        width: auto;
-        }
-        .main_left{
-         width: 589px;
-         padding: 0;
-        svg{
-         padding: 0;
-        }
-        }
       }
    }
 }

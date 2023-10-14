@@ -1,10 +1,11 @@
-import './sass/main.scss';
+import "./sass/main.scss";
 
-import './assets/bg.jpg';
+import "./assets/bg.jpg";
 
+document.querySelector(".c-hamburger").addEventListener("click", function (e) {
+  console.log(444);
+  e.preventDefault();
+  this.classList.add("is-active");
+});
 
-console.log("Hallo");
-
-console.log(5 + 50);
-
-
+console.log(44444444444);
